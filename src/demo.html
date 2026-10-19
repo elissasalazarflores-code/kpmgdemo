@@ -1,0 +1,730 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beneficios KPMG · Cine con TaquillApp</title>
+<style>
+  :root{
+    /* Paleta KPMG */
+    --kpmg-blue:#00338D;
+    --kpmg-cobalt:#1E49E2;
+    --kpmg-medium:#005EB8;
+    --kpmg-light:#0091DA;
+    --kpmg-pacific:#00B8F5;
+    --kpmg-dark:#0C233C;
+    --kpmg-ice:#E8F0FB;
+    --kpmg-sky:#ACEAFF;
+    --kpmg-purple:#7213EA;
+    --ink:#0C233C;
+    --muted:#4A5A70;
+    --line:#D6DEEA;
+    --bg:#F4F7FB;
+    --white:#FFFFFF;
+    --ok:#00A3A1;
+    --radius:14px;
+    --shadow:0 10px 30px rgba(0,51,141,.10);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:Arial,"Helvetica Neue",Helvetica,sans-serif;color:var(--ink);background:var(--bg);line-height:1.5;-webkit-font-smoothing:antialiased}
+  img{max-width:100%;display:block}
+  a{color:inherit}
+  button{font:inherit;cursor:pointer}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+  /* Barra demo */
+  .demo-bar{background:var(--kpmg-dark);color:#cfe0ff;font-size:12.5px;text-align:center;padding:6px 12px;letter-spacing:.02em}
+  .demo-bar b{color:#fff}
+
+  /* Header */
+  header.top{position:sticky;top:0;z-index:40;background:var(--kpmg-blue);color:#fff;box-shadow:0 2px 12px rgba(0,0,0,.15)}
+  header.top .wrap{display:flex;align-items:center;gap:18px;height:68px}
+  .brand{display:flex;align-items:center;gap:14px;text-decoration:none}
+  .brand img{height:34px;width:auto}
+  .brand .sep{width:1px;height:30px;background:rgba(255,255,255,.35)}
+  .brand .co{font-size:13px;line-height:1.15}
+  .brand .co b{display:block;font-size:15px;letter-spacing:.01em}
+  nav.menu{margin-left:auto;display:flex;gap:22px;font-size:14px}
+  nav.menu a{text-decoration:none;opacity:.88}
+  nav.menu a:hover{opacity:1;text-decoration:underline;text-underline-offset:4px}
+  .cart-btn{display:flex;align-items:center;gap:8px;background:#fff;color:var(--kpmg-blue);border:0;border-radius:999px;padding:9px 16px;font-weight:700;font-size:14px}
+  .cart-btn .count{background:var(--kpmg-cobalt);color:#fff;border-radius:999px;min-width:22px;height:22px;display:inline-grid;place-items:center;font-size:12px;padding:0 6px}
+  @media (max-width:860px){nav.menu{display:none}.cart-btn{margin-left:auto}.brand .co{display:none}.brand .sep{display:none}}
+
+  /* Hero */
+  .hero{position:relative;overflow:hidden;background:linear-gradient(120deg,var(--kpmg-blue) 0%,var(--kpmg-cobalt) 62%,var(--kpmg-light) 100%);color:#fff}
+  .hero::before{content:"";position:absolute;inset:0;background:
+     repeating-linear-gradient(90deg,rgba(255,255,255,.06) 0 1px,transparent 1px 25%),
+     linear-gradient(0deg,rgba(255,255,255,.06) 1px,transparent 1px) 0 72%/100% 100% no-repeat;pointer-events:none}
+  .hero .wrap{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding-top:64px;padding-bottom:72px}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);padding:6px 12px;border-radius:999px;font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+  .hero h1{font-size:clamp(34px,5vw,58px);line-height:1.04;margin:18px 0 14px;font-weight:800;letter-spacing:-.01em}
+  .hero h1 em{font-style:normal;color:var(--kpmg-sky)}
+  .hero p.lead{font-size:clamp(16px,1.6vw,19px);max-width:560px;opacity:.95;margin:0 0 26px}
+  .cta{display:flex;flex-wrap:wrap;gap:12px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:10px;padding:13px 22px;font-weight:700;font-size:15px;border:2px solid transparent;text-decoration:none;transition:transform .15s ease, box-shadow .15s ease, background .15s}
+  .btn:hover{transform:translateY(-1px)}
+  .btn-white{background:#fff;color:var(--kpmg-blue)}
+  .btn-ghost{background:transparent;border-color:rgba(255,255,255,.7);color:#fff}
+  .btn-primary{background:var(--kpmg-blue);color:#fff}
+  .btn-primary:hover{background:var(--kpmg-cobalt);box-shadow:0 6px 16px rgba(30,73,226,.3)}
+  .btn-outline{background:#fff;border-color:var(--kpmg-blue);color:var(--kpmg-blue)}
+  .btn[disabled]{opacity:.45;cursor:not-allowed;transform:none}
+  .hero-points{display:flex;flex-wrap:wrap;gap:18px;margin-top:28px;font-size:14px;opacity:.95}
+  .hero-points span{display:flex;align-items:center;gap:8px}
+  .hero-points i{width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.18);display:grid;place-items:center;font-style:normal;font-size:12px}
+
+  .discount-card{position:relative;justify-self:center;width:min(420px,100%)}
+  .big-off{background:#fff;color:var(--kpmg-blue);border-radius:22px;padding:30px 30px 26px;box-shadow:0 30px 60px rgba(0,20,70,.35);transform:rotate(-2deg)}
+  .big-off small{display:block;font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--kpmg-medium)}
+  .big-off .pct{font-size:clamp(64px,9vw,104px);font-weight:900;line-height:.95;letter-spacing:-.03em;margin:6px 0 2px}
+  .big-off .pct sup{font-size:.42em;vertical-align:top;position:relative;top:.25em;margin-right:4px}
+  .big-off .lbl{font-size:22px;font-weight:800;color:var(--ink)}
+  .big-off .chains{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
+  .ticket-mini{position:absolute;right:-14px;bottom:-34px;background:var(--kpmg-dark);color:#fff;border-radius:12px;padding:12px 16px;transform:rotate(5deg);box-shadow:0 18px 30px rgba(0,0,0,.3);font-size:12px;display:flex;gap:12px;align-items:center}
+  .ticket-mini b{display:block;font-size:15px;letter-spacing:.08em;font-family:"Courier New",monospace}
+  .ticket-mini .dot{width:34px;height:34px;border-radius:8px;background:var(--kpmg-pacific);display:grid;place-items:center;font-weight:900;color:var(--kpmg-dark)}
+  @media (max-width:900px){.hero .wrap{grid-template-columns:1fr;padding-top:44px;padding-bottom:70px}.discount-card{margin-top:10px}}
+
+  .chain{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:800;letter-spacing:.03em;padding:5px 10px;border-radius:999px;border:1.5px solid currentColor}
+  .chain.cp{color:#0B3C8C;background:#EAF1FF}
+  .chain.cx{color:#B0122B;background:#FFEDEF}
+
+  /* Banda beneficios */
+  .perks{background:#fff;border-bottom:1px solid var(--line)}
+  .perks .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+  .perk{display:flex;gap:14px;align-items:flex-start;padding:24px 18px;border-right:1px solid var(--line)}
+  .perk:last-child{border-right:0}
+  .perk .ic{flex:0 0 42px;height:42px;border-radius:10px;background:var(--kpmg-ice);color:var(--kpmg-blue);display:grid;place-items:center}
+  .perk b{display:block;font-size:15px}
+  .perk span{font-size:13.5px;color:var(--muted)}
+  @media (max-width:900px){.perks .wrap{grid-template-columns:1fr 1fr}.perk:nth-child(2){border-right:0}.perk:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+  @media (max-width:520px){.perks .wrap{grid-template-columns:1fr}.perk{border-right:0;border-bottom:1px solid var(--line)}}
+
+  section{padding:72px 0}
+  .sec-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:30px}
+  .sec-head h2{font-size:clamp(26px,3vw,38px);margin:6px 0 0;color:var(--kpmg-blue);line-height:1.1;letter-spacing:-.01em}
+  .kicker{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--kpmg-cobalt)}
+  .sec-head p{margin:8px 0 0;color:var(--muted);max-width:620px}
+
+  /* Pasos */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;counter-reset:s}
+  .step{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px 20px;position:relative}
+  .step::before{counter-increment:s;content:counter(s);position:absolute;top:-16px;left:20px;width:34px;height:34px;border-radius:50%;background:var(--kpmg-blue);color:#fff;font-weight:800;display:grid;place-items:center;box-shadow:0 0 0 5px var(--bg)}
+  .step h3{margin:12px 0 6px;font-size:17px}
+  .step p{margin:0;color:var(--muted);font-size:14.5px}
+  @media (max-width:900px){.steps{grid-template-columns:1fr 1fr;row-gap:30px}}
+  @media (max-width:520px){.steps{grid-template-columns:1fr}}
+
+  /* Catálogo */
+  #catalogo{background:#fff}
+  .filters{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:8px 16px;font-size:14px;font-weight:700;color:var(--muted)}
+  .chip[aria-pressed="true"]{background:var(--kpmg-blue);border-color:var(--kpmg-blue);color:#fff}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  @media (max-width:980px){.grid{grid-template-columns:1fr 1fr}}
+  @media (max-width:620px){.grid{grid-template-columns:1fr}}
+  .card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff;transition:box-shadow .2s, transform .2s}
+  .card:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+  .card .visual{position:relative;height:130px;color:#fff;padding:16px 18px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+  .card .visual::after{content:"";position:absolute;left:-12px;right:-12px;bottom:-12px;height:24px;background:radial-gradient(circle at 12px 12px,#fff 9px,transparent 10px) 0 0/28px 24px repeat-x}
+  .card .visual.cp{background:linear-gradient(135deg,var(--kpmg-blue),var(--kpmg-medium))}
+  .card .visual.cx{background:linear-gradient(135deg,var(--kpmg-dark),var(--kpmg-cobalt))}
+  .card .visual .fmt{font-size:26px;font-weight:900;letter-spacing:-.01em;line-height:1}
+  .card .visual .chainname{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;opacity:.9}
+  .card .save{position:absolute;top:14px;right:14px;background:#fff;color:var(--kpmg-blue);border-radius:999px;padding:5px 11px;font-size:12.5px;font-weight:900}
+  .card .body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+  .card h3{margin:0;font-size:17px;line-height:1.25}
+  .meta{display:flex;flex-wrap:wrap;gap:6px}
+  .tag{font-size:12px;color:var(--muted);background:var(--bg);border-radius:6px;padding:3px 8px}
+  .price{display:flex;align-items:baseline;gap:10px;margin-top:auto}
+  .price .now{font-size:30px;font-weight:900;color:var(--kpmg-blue);letter-spacing:-.02em}
+  .price .now small{font-size:13px;font-weight:700;color:var(--muted);margin-left:2px}
+  .price .was{color:var(--muted);text-decoration:line-through;font-size:14px}
+  .price-lbl{font-size:12px;color:var(--muted);margin-top:-8px}
+  .buy-row{display:flex;gap:10px;align-items:center}
+  .qty{display:flex;align-items:center;border:1.5px solid var(--line);border-radius:10px;overflow:hidden}
+  .qty button{width:36px;height:42px;border:0;background:#fff;font-size:18px;color:var(--kpmg-blue);font-weight:800}
+  .qty button:hover{background:var(--kpmg-ice)}
+  .qty output{width:32px;text-align:center;font-weight:800}
+  .buy-row .btn{flex:1;padding:11px 14px}
+  .note{font-size:12.5px;color:var(--muted);margin-top:22px}
+
+  /* Comparativo */
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:stretch}
+  .cmp{border-radius:18px;padding:28px;background:#fff;border:1px solid var(--line)}
+  .cmp.win{background:var(--kpmg-blue);color:#fff;border-color:var(--kpmg-blue);box-shadow:var(--shadow)}
+  .cmp h3{margin:0 0 4px;font-size:18px}
+  .cmp .amt{font-size:46px;font-weight:900;letter-spacing:-.02em;margin:8px 0}
+  .cmp ul{padding-left:18px;margin:10px 0 0;font-size:14.5px}
+  .cmp.win .amt{color:var(--kpmg-sky)}
+  .calc{margin-top:22px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px 24px;display:flex;flex-wrap:wrap;gap:18px;align-items:center}
+  .calc label{font-weight:700;font-size:14.5px}
+  .calc input[type=range]{flex:1;min-width:200px;accent-color:var(--kpmg-blue)}
+  .calc .res{font-size:15px}
+  .calc .res b{font-size:24px;color:var(--kpmg-blue)}
+  @media (max-width:760px){.compare{grid-template-columns:1fr}}
+
+  /* Canje */
+  .redeem{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .rd{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px}
+  .rd h3{display:flex;align-items:center;gap:10px;margin:0 0 12px;font-size:19px}
+  .rd ol{margin:0;padding-left:20px;color:var(--ink)}
+  .rd ol li{margin:6px 0;font-size:14.5px}
+  .rd ol li span{color:var(--muted)}
+  @media (max-width:760px){.redeem{grid-template-columns:1fr}}
+
+  /* Soporte */
+  .support{background:linear-gradient(120deg,var(--kpmg-dark),var(--kpmg-blue));color:#fff;border-radius:22px;padding:40px;display:grid;grid-template-columns:1.2fr .8fr;gap:30px;align-items:center}
+  .support h2{color:#fff;margin:6px 0 10px;font-size:clamp(24px,2.6vw,34px);line-height:1.15}
+  .support .kicker{color:var(--kpmg-sky)}
+  .support p{opacity:.92;margin:0}
+  .support ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+  .support li{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:14px 16px;font-size:14.5px}
+  .support li b{display:block;font-size:15.5px}
+  @media (max-width:820px){.support{grid-template-columns:1fr;padding:28px}}
+
+  /* FAQ */
+  .faq{max-width:860px}
+  .faq details{background:#fff;border:1px solid var(--line);border-radius:12px;margin-bottom:10px;padding:0 20px}
+  .faq summary{list-style:none;cursor:pointer;padding:18px 0;font-weight:700;display:flex;justify-content:space-between;gap:16px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";color:var(--kpmg-blue);font-size:22px;line-height:1;font-weight:400}
+  .faq details[open] summary::after{content:"–"}
+  .faq details p{margin:0 0 18px;color:var(--muted);font-size:15px}
+
+  footer{background:var(--kpmg-dark);color:#b8c7dd;padding:36px 0;font-size:13px}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center}
+  footer img{height:26px;width:auto}
+  footer .claim{color:#fff;font-weight:800;font-size:15px}
+
+  /* Carrito */
+  .scrim{position:fixed;inset:0;background:rgba(12,35,60,.55);opacity:0;pointer-events:none;transition:opacity .2s;z-index:60}
+  .scrim.on{opacity:1;pointer-events:auto}
+  .drawer{position:fixed;top:0;right:0;height:100%;width:min(420px,100%);background:#fff;z-index:70;transform:translateX(100%);transition:transform .25s ease;display:flex;flex-direction:column;box-shadow:-10px 0 30px rgba(0,0,0,.2)}
+  .drawer.on{transform:none}
+  .drawer header{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid var(--line)}
+  .drawer header h3{margin:0;color:var(--kpmg-blue)}
+  .x{border:0;background:var(--bg);width:36px;height:36px;border-radius:50%;font-size:20px;color:var(--ink)}
+  .drawer .items{flex:1;overflow:auto;padding:12px 20px}
+  .line{display:grid;grid-template-columns:1fr auto;gap:6px 10px;padding:14px 0;border-bottom:1px solid var(--line)}
+  .line .n{font-weight:700;font-size:14.5px}
+  .line .s{font-size:12.5px;color:var(--muted)}
+  .line .p{font-weight:800;color:var(--kpmg-blue);text-align:right}
+  .line .ctl{display:flex;gap:10px;align-items:center;grid-column:1/-1}
+  .line .ctl .qty button{height:32px;width:30px}
+  .link{border:0;background:none;color:var(--muted);text-decoration:underline;font-size:12.5px;padding:0}
+  .empty{color:var(--muted);text-align:center;padding:40px 10px}
+  .totals{border-top:1px solid var(--line);padding:16px 20px 20px;display:grid;gap:6px}
+  .totals .r{display:flex;justify-content:space-between;font-size:14.5px}
+  .totals .r.save{color:var(--ok);font-weight:700}
+  .totals .r.t{font-size:19px;font-weight:900;color:var(--kpmg-blue);margin-top:4px}
+  .totals .btn{margin-top:10px;width:100%}
+
+  /* Modal checkout */
+  .modal{position:fixed;inset:0;z-index:80;display:grid;place-items:center;padding:16px;pointer-events:none;opacity:0;transition:opacity .2s}
+  .modal.on{pointer-events:auto;opacity:1}
+  .dialog{background:#fff;border-radius:20px;width:min(640px,100%);max-height:calc(100vh - 32px);overflow:auto;box-shadow:0 30px 70px rgba(0,0,0,.35)}
+  .dialog .dh{position:sticky;top:0;background:#fff;z-index:2;padding:18px 24px 0;border-bottom:1px solid var(--line)}
+  .dialog .dh .row{display:flex;justify-content:space-between;align-items:center}
+  .dialog .dh h3{margin:0;color:var(--kpmg-blue)}
+  .progress{display:flex;gap:6px;margin:14px 0 0}
+  .progress div{flex:1;padding-bottom:12px;font-size:12px;font-weight:700;color:var(--muted);border-bottom:3px solid var(--line)}
+  .progress div.on{color:var(--kpmg-blue);border-color:var(--kpmg-blue)}
+  .dialog .db{padding:22px 24px 26px}
+  .field{display:grid;gap:6px;margin-bottom:14px}
+  .field label{font-size:13px;font-weight:700}
+  .field input,.field select{border:1.5px solid var(--line);border-radius:10px;padding:11px 12px;font:inherit;font-size:15px;color:var(--ink);background:#fff}
+  .field input:focus,.field select:focus{outline:none;border-color:var(--kpmg-cobalt);box-shadow:0 0 0 3px rgba(30,73,226,.15)}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media (max-width:520px){.two{grid-template-columns:1fr}}
+  .pay-opts{display:grid;gap:10px;margin-bottom:14px}
+  .pay-opt{display:flex;gap:12px;align-items:flex-start;border:1.5px solid var(--line);border-radius:12px;padding:14px;cursor:pointer}
+  .pay-opt input{margin-top:3px;accent-color:var(--kpmg-blue)}
+  .pay-opt b{display:block;font-size:14.5px}
+  .pay-opt span{font-size:13px;color:var(--muted)}
+  .pay-opt:has(input:checked){border-color:var(--kpmg-blue);background:var(--kpmg-ice)}
+  .summary{background:var(--bg);border-radius:12px;padding:14px 16px;font-size:14px;margin-bottom:16px}
+  .summary .r{display:flex;justify-content:space-between;margin:3px 0}
+  .summary .r.t{font-weight:900;color:var(--kpmg-blue);font-size:16px;border-top:1px solid var(--line);padding-top:8px;margin-top:8px}
+  .actions{display:flex;gap:10px;justify-content:space-between;margin-top:6px}
+  .disc{font-size:12px;color:var(--muted);margin-top:12px}
+  .processing{text-align:center;padding:40px 10px}
+  .spinner{width:46px;height:46px;border-radius:50%;border:4px solid var(--kpmg-ice);border-top-color:var(--kpmg-blue);margin:0 auto 16px;animation:spin .8s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .success{display:flex;gap:12px;align-items:center;background:#E6F7F6;color:#006E6C;border-radius:12px;padding:12px 14px;font-weight:700;margin-bottom:16px}
+  .folio{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;border:1.5px dashed var(--kpmg-blue);border-radius:14px;padding:14px;margin-bottom:12px;background:#fff}
+  .qr{width:84px;height:84px;display:grid;grid-template-columns:repeat(21,1fr);background:#fff;padding:3px;border:1px solid var(--line);border-radius:6px}
+  .qr i{display:block}
+  .qr i.k{background:var(--kpmg-dark)}
+  .folio .code{font-family:"Courier New",monospace;font-size:19px;font-weight:900;letter-spacing:.08em;color:var(--kpmg-blue);word-break:break-all}
+  .folio .fi{font-size:13px;color:var(--muted)}
+  .folio .fi b{color:var(--ink)}
+  .copy{border:1.5px solid var(--line);background:#fff;border-radius:8px;font-size:12px;padding:4px 10px;margin-top:6px;font-weight:700;color:var(--kpmg-blue)}
+  .howto{background:var(--kpmg-ice);border-radius:12px;padding:14px 16px;font-size:14px;margin-top:6px}
+  .howto b{color:var(--kpmg-blue)}
+  .howto ol{margin:6px 0 0;padding-left:18px}
+
+  .toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,30px);background:var(--kpmg-dark);color:#fff;padding:12px 18px;border-radius:12px;font-size:14px;font-weight:700;opacity:0;transition:all .25s;z-index:90;box-shadow:0 10px 30px rgba(0,0,0,.25);pointer-events:none}
+  .toast.on{opacity:1;transform:translate(-50%,0)}
+
+  @media print{
+    body *{visibility:hidden}
+    #checkout .dialog, #checkout .dialog *{visibility:visible}
+    #checkout .dialog{position:absolute;left:0;top:0;box-shadow:none;max-height:none;width:100%}
+    .no-print{display:none!important}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="demo-bar"><b>Demo ilustrativa</b> · Programa de beneficios corporativos KPMG × TaquillApp para Empresas · Simulación sin cargos reales</div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#inicio" aria-label="Inicio">
+      <img src="{{LOGO_WHITE}}" alt="KPMG">
+      <span class="sep"></span>
+      <span class="co"><b>Beneficios KPMG</b>Cine con TaquillApp</span>
+    </a>
+    <nav class="menu" aria-label="Secciones">
+      <a href="#como-funciona">¿Cómo funciona?</a>
+      <a href="#catalogo">Catálogo</a>
+      <a href="#ahorro">Tu ahorro</a>
+      <a href="#canje">Canje</a>
+      <a href="#faq">Preguntas</a>
+    </nav>
+    <button class="cart-btn" id="openCart" aria-label="Abrir carrito">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3a2 2 0 0 0 0-4z"/><path d="M14 5v14" stroke-dasharray="2 2"/></svg>
+      Mis folios <span class="count" id="cartCount">0</span>
+    </button>
+  </div>
+</header>
+
+<main id="inicio">
+  <!-- HERO -->
+  <section class="hero" style="padding:0">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">★ Beneficio exclusivo para colaboradores KPMG</span>
+        <h1>El mejor precio para ir al cine, <em>siempre.</em></h1>
+        <p class="lead">Por ser parte de KPMG, accedes a folios y códigos de cine para <b>Cinépolis</b> y <b>Cinemex</b> con <b>más de 50% de descuento</b>. Los compras aquí, los recibes al instante y los canjeas directo en el cine.</p>
+        <div class="cta">
+          <a class="btn btn-white" href="#catalogo">Ver catálogo</a>
+          <a class="btn btn-ghost" href="#como-funciona">¿Cómo funciona?</a>
+        </div>
+        <div class="hero-points">
+          <span><i>✓</i>Códigos digitales al instante</span>
+          <span><i>✓</i>Válidos en todo México</span>
+          <span><i>✓</i>Soporte TaquillApp</span>
+        </div>
+      </div>
+      <div class="discount-card" aria-hidden="true">
+        <div class="big-off">
+          <small>Beneficio KPMG</small>
+          <div class="pct"><sup>+</sup>50%</div>
+          <div class="lbl">de descuento en boletos de cine</div>
+          <div class="chains"><span class="chain cp">CINÉPOLIS</span><span class="chain cx">CINEMEX</span></div>
+        </div>
+        <div class="ticket-mini"><span class="dot">🎬</span><span>Tu folio<b>KP-7F3X-Q92M</b></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PERKS -->
+  <div class="perks">
+    <div class="wrap">
+      <div class="perk"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M19 5 5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/></svg></div><div><b>Más de 50% de descuento</b><span>Frente al precio regular de taquilla.</span></div></div>
+      <div class="perk"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div><div><b>Entrega inmediata</b><span>Tu folio llega a tu correo en segundos.</span></div></div>
+      <div class="perk"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div><div><b>Cinépolis y Cinemex</b><span>Canjea en complejos de todo el país.</span></div></div>
+      <div class="perk"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/></svg></div><div><b>Soporte dedicado</b><span>TaquillApp para Empresas te acompaña.</span></div></div>
+    </div>
+  </div>
+
+  <!-- CÓMO FUNCIONA -->
+  <section id="como-funciona">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="kicker">¿Cómo funciona?</span>
+          <h2>Del catálogo a la butaca en 4 pasos</h2>
+          <p>KPMG pone el beneficio, TaquillApp entrega los folios. Tú solo eliges tu película y la disfrutas pagando menos.</p>
+        </div>
+      </div>
+      <div class="steps">
+        <div class="step"><h3>Elige tu cine y formato</h3><p>Explora el catálogo de folios para Cinépolis o Cinemex: tradicional, VIP y más.</p></div>
+        <div class="step"><h3>Compra con tu beneficio</h3><p>Paga el precio preferencial KPMG con tarjeta o descuento vía nómina.</p></div>
+        <div class="step"><h3>Recibe tu folio</h3><p>Obtén tus códigos al instante en pantalla y en tu correo corporativo.</p></div>
+        <div class="step"><h3>Canjea en el cine</h3><p>Presenta tu folio directamente en Cinépolis o Cinemex y elige tu función.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATÁLOGO -->
+  <section id="catalogo">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="kicker">Catálogo de folios</span>
+          <h2>Elige tu cine y compra tu código</h2>
+          <p>Precios preferenciales para colaboradores KPMG. Agrega folios a tu carrito para simular la compra.</p>
+        </div>
+        <div class="filters" role="group" aria-label="Filtrar por cadena">
+          <button class="chip" data-f="all" aria-pressed="true">Todos</button>
+          <button class="chip" data-f="cp" aria-pressed="false">Cinépolis</button>
+          <button class="chip" data-f="cx" aria-pressed="false">Cinemex</button>
+        </div>
+      </div>
+      <div class="grid" id="grid"></div>
+      <p class="note">* Precios de referencia para fines de demostración, basados en el catálogo público de TaquillApp. El precio de taquilla es un estimado del precio regular en zonas y horarios de mayor demanda. Los folios están sujetos a la vigencia y condiciones de cada cadena.</p>
+    </div>
+  </section>
+
+  <!-- AHORRO -->
+  <section id="ahorro">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="kicker">Tu ahorro</span>
+          <h2>Mismo cine, mismo asiento, mucho menos</h2>
+          <p>Ejemplo con 2 boletos VIP de Cinépolis para una salida en pareja.</p>
+        </div>
+      </div>
+      <div class="compare">
+        <div class="cmp">
+          <h3>Precio regular en taquilla</h3>
+          <div class="amt" id="cmpRegular">$0</div>
+          <ul><li>Precio completo por boleto</li><li>Sin beneficio corporativo</li></ul>
+        </div>
+        <div class="cmp win">
+          <h3>Con tu beneficio KPMG</h3>
+          <div class="amt" id="cmpKpmg">$0</div>
+          <ul><li>Folio digital TaquillApp</li><li>Canje directo en el cine</li><li>Ahorras <b id="cmpSave">$0</b></li></ul>
+        </div>
+      </div>
+      <div class="calc">
+        <label for="visits">¿Cuántas veces vas al cine al mes?</label>
+        <input type="range" id="visits" min="1" max="8" value="2">
+        <div class="res"><span id="visitsLbl">2 visitas</span> con 2 boletos VIP · Ahorro anual estimado: <b id="yearSave">$0</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CANJE -->
+  <section id="canje" style="background:#fff">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="kicker">Canje</span>
+          <h2>Tu folio se canjea directo en el cine</h2>
+          <p>TaquillApp te entrega el folio o código; el canje lo haces con la cadena que elegiste.</p>
+        </div>
+      </div>
+      <div class="redeem">
+        <div class="rd">
+          <h3><span class="chain cp">CINÉPOLIS</span> Cómo canjear</h3>
+          <ol>
+            <li>Acude a cualquier complejo Cinépolis participante. <span>Revisa vigencia y formato de tu folio.</span></li>
+            <li>Elige tu película, horario y asientos en taquilla.</li>
+            <li>Presenta tu folio impreso o desde tu celular.</li>
+            <li>Recibe tu boleto y ¡disfruta la función!</li>
+          </ol>
+        </div>
+        <div class="rd">
+          <h3><span class="chain cx">CINEMEX</span> Cómo canjear</h3>
+          <ol>
+            <li>Acude a cualquier complejo Cinemex participante. <span>Verifica días válidos de tu folio.</span></li>
+            <li>Elige tu película, horario y asientos en taquilla.</li>
+            <li>Presenta tu código impreso o desde tu celular.</li>
+            <li>Recibe tu boleto y ¡disfruta la función!</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOPORTE -->
+  <section>
+    <div class="wrap">
+      <div class="support">
+        <div>
+          <span class="kicker">TaquillApp para Empresas</span>
+          <h2>Un beneficio que KPMG ofrece y TaquillApp respalda</h2>
+          <p>Nos encargamos de la emisión de folios, la atención a colaboradores y los reportes del programa, para que el equipo de Personas de KPMG ofrezca un beneficio tangible sin carga operativa.</p>
+        </div>
+        <ul>
+          <li><b>Atención a colaboradores</b>Ayuda con compras, folios y canjes.</li>
+          <li><b>Reportes para KPMG</b>Uso del beneficio y ahorro generado al equipo.</li>
+          <li><b>Pago flexible</b>Tarjeta o descuento vía nómina, según la política de KPMG.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" style="padding-top:20px">
+    <div class="wrap">
+      <div class="sec-head"><div><span class="kicker">Preguntas frecuentes</span><h2>Todo lo que necesitas saber</h2></div></div>
+      <div class="faq">
+        <details open><summary>¿Quién puede usar este beneficio?</summary><p>Todos los colaboradores de KPMG en México con correo corporativo activo. El acceso se valida con tu número de colaborador.</p></details>
+        <details><summary>¿Qué recibo al comprar?</summary><p>Un folio o código digital por cada boleto. TaquillApp emite los folios; tú los canjeas directamente en la taquilla de Cinépolis o Cinemex, según el folio que hayas elegido.</p></details>
+        <details><summary>¿Cuánto me ahorro?</summary><p>Más de 50% de descuento frente al precio regular de taquilla, dependiendo de la cadena, el formato y el complejo. El mejor precio para ir al cine, siempre.</p></details>
+        <details><summary>¿Tienen vigencia los folios?</summary><p>Sí. Cada folio indica su vigencia, días válidos y formato. Consúltalo antes de acudir al cine.</p></details>
+        <details><summary>¿Puedo regalar mis folios?</summary><p>Sí, los folios son al portador: puedes compartirlos con familiares o amigos para que los canjeen.</p></details>
+        <details><summary>¿A quién contacto si tengo un problema?</summary><p>Al equipo de soporte de TaquillApp para Empresas, a través del canal de atención exclusivo del programa de beneficios KPMG.</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div style="display:flex;align-items:center;gap:16px"><img src="{{LOGO_WHITE}}" alt="KPMG"><span class="claim">El mejor precio para ir al cine, siempre.</span></div>
+    <div>Beneficios KPMG · Folios de cine provistos por TaquillApp para Empresas.<br>Demo ilustrativa sin valor comercial. Cinépolis y Cinemex son marcas de sus respectivos titulares.</div>
+  </div>
+</footer>
+
+<!-- CARRITO -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Carrito" aria-hidden="true">
+  <header><h3>Mis folios</h3><button class="x" data-close aria-label="Cerrar">×</button></header>
+  <div class="items" id="cartItems"></div>
+  <div class="totals" id="cartTotals"></div>
+</aside>
+
+<!-- CHECKOUT -->
+<div class="modal" id="checkout" role="dialog" aria-modal="true" aria-labelledby="ckTitle">
+  <div class="dialog">
+    <div class="dh">
+      <div class="row"><h3 id="ckTitle">Compra con tu beneficio KPMG</h3><button class="x no-print" data-close aria-label="Cerrar">×</button></div>
+      <div class="progress no-print" id="progress"><div>1. Colaborador</div><div>2. Pago</div><div>3. Tus folios</div></div>
+    </div>
+    <div class="db" id="ckBody"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* ===== Catálogo (editable) =====
+   chain: "cp" Cinépolis | "cx" Cinemex
+   price: precio preferencial KPMG/TaquillApp · regular: precio estimado en taquilla */
+const PRODUCTS = [
+  {id:"cp-vip",  chain:"cp", fmt:"VIP",          name:"Boleto VIP 2D",                days:"Lunes a domingo", price:150, regular:320, tags:["Sala VIP","Asiento reclinable"]},
+  {id:"cp-trad", chain:"cp", fmt:"Tradicional",  name:"Boleto Tradicional 2D",        days:"Lunes a domingo", price:72,  regular:150, tags:["Sala tradicional","2D"]},
+  {id:"cp-2d",   chain:"cp", fmt:"2D",           name:"Boleto 2D Entre semana",       days:"Lunes a jueves",  price:68,  regular:140, tags:["Sala tradicional","2D"]},
+  {id:"cx-trad-ld", chain:"cx", fmt:"Tradicional", name:"Boleto Tradicional 2D",      days:"Lunes a domingo", price:62,  regular:130, tags:["Sala tradicional","2D"]},
+  {id:"cx-trad-lv", chain:"cx", fmt:"Tradicional", name:"Boleto Tradicional 2D",      days:"Lunes a viernes", price:61,  regular:125, tags:["Sala tradicional","2D"]},
+  {id:"cx-platino", chain:"cx", fmt:"Platino",   name:"Boleto Platino 2D",            days:"Lunes a domingo", price:145, regular:300, tags:["Sala Platino","Servicio a la butaca"]}
+];
+const CHAIN = {cp:"Cinépolis", cx:"Cinemex"};
+
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const mxn = n => n.toLocaleString("es-MX",{style:"currency",currency:"MXN",maximumFractionDigits:0});
+const pct = p => Math.round((1 - p.price/p.regular)*100);
+const byId = id => PRODUCTS.find(p => p.id === id);
+
+let cart = {};          // id -> qty
+const pick = {};        // id -> qty seleccionada en la tarjeta
+let filter = "all";
+
+/* ----- Render catálogo ----- */
+function renderGrid(){
+  $("#grid").innerHTML = PRODUCTS.filter(p => filter==="all" || p.chain===filter).map(p => {
+    pick[p.id] = pick[p.id] || 1;
+    return `<article class="card">
+      <div class="visual ${p.chain}">
+        <span class="chainname">${CHAIN[p.chain]}</span>
+        <span class="fmt">${p.fmt}</span>
+        <span class="save">-${pct(p)}%</span>
+      </div>
+      <div class="body">
+        <h3>${p.name} · ${CHAIN[p.chain]}</h3>
+        <div class="meta"><span class="tag">📅 ${p.days}</span>${p.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>
+        <div class="price"><span class="now">${mxn(p.price)}<small>c/u</small></span><span class="was">${mxn(p.regular)}</span></div>
+        <div class="price-lbl">Precio KPMG · ahorras ${mxn(p.regular-p.price)} por boleto</div>
+        <div class="buy-row">
+          <div class="qty" aria-label="Cantidad">
+            <button data-pq="${p.id}" data-d="-1" aria-label="Menos">−</button>
+            <output id="pq-${p.id}">${pick[p.id]}</output>
+            <button data-pq="${p.id}" data-d="1" aria-label="Más">+</button>
+          </div>
+          <button class="btn btn-primary" data-add="${p.id}">Agregar</button>
+        </div>
+      </div>
+    </article>`;
+  }).join("");
+}
+
+$("#grid").addEventListener("click", e => {
+  const q = e.target.closest("[data-pq]");
+  if (q){ const id=q.dataset.pq; pick[id]=Math.min(10,Math.max(1,pick[id]+ +q.dataset.d)); $("#pq-"+id).textContent=pick[id]; return; }
+  const a = e.target.closest("[data-add]");
+  if (a){ const id=a.dataset.add; cart[id]=Math.min(20,(cart[id]||0)+pick[id]); renderCart(); toast(`${pick[id]} folio(s) agregado(s) al carrito`); pick[id]=1; $("#pq-"+id).textContent=1; }
+});
+
+$$(".chip").forEach(c => c.addEventListener("click", () => {
+  filter = c.dataset.f;
+  $$(".chip").forEach(x => x.setAttribute("aria-pressed", x===c));
+  renderGrid();
+}));
+
+/* ----- Carrito ----- */
+function totals(){
+  let sub=0, reg=0, n=0;
+  for (const [id,q] of Object.entries(cart)){ const p=byId(id); sub+=p.price*q; reg+=p.regular*q; n+=q; }
+  return {sub, reg, n, save:reg-sub};
+}
+function renderCart(){
+  const t = totals();
+  $("#cartCount").textContent = t.n;
+  const ids = Object.keys(cart);
+  $("#cartItems").innerHTML = ids.length ? ids.map(id => { const p=byId(id), q=cart[id]; return `
+    <div class="line">
+      <div><div class="n">${p.name}</div><div class="s">${CHAIN[p.chain]} · ${p.days}</div></div>
+      <div class="p">${mxn(p.price*q)}<div class="s" style="text-decoration:line-through">${mxn(p.regular*q)}</div></div>
+      <div class="ctl">
+        <div class="qty"><button data-cq="${id}" data-d="-1" aria-label="Menos">−</button><output>${q}</output><button data-cq="${id}" data-d="1" aria-label="Más">+</button></div>
+        <button class="link" data-rm="${id}">Quitar</button>
+      </div>
+    </div>`; }).join("")
+    : `<div class="empty">🎟️<br><br>Aún no tienes folios.<br>Explora el catálogo y agrega tus boletos.</div>`;
+  $("#cartTotals").innerHTML = ids.length ? `
+    <div class="r"><span>Precio en taquilla</span><span style="text-decoration:line-through">${mxn(t.reg)}</span></div>
+    <div class="r save"><span>Ahorro con beneficio KPMG</span><span>−${mxn(t.save)}</span></div>
+    <div class="r t"><span>Total</span><span>${mxn(t.sub)}</span></div>
+    <button class="btn btn-primary" id="goCheckout">Continuar compra</button>` : `<a class="btn btn-outline" href="#catalogo" data-close>Ver catálogo</a>`;
+}
+$("#drawer").addEventListener("click", e => {
+  const q=e.target.closest("[data-cq]");
+  if (q){ const id=q.dataset.cq; cart[id]+= +q.dataset.d; if(cart[id]<=0) delete cart[id]; if(cart[id]>20) cart[id]=20; renderCart(); return; }
+  const r=e.target.closest("[data-rm]");
+  if (r){ delete cart[r.dataset.rm]; renderCart(); return; }
+  if (e.target.closest("#goCheckout")){ closeAll(); openCheckout(); return; }
+  if (e.target.closest("[data-close]")) closeAll();
+});
+function openCart(){ $("#scrim").classList.add("on"); $("#drawer").classList.add("on"); $("#drawer").setAttribute("aria-hidden","false"); }
+function closeAll(){ ["#scrim","#drawer","#checkout"].forEach(s=>$(s).classList.remove("on")); $("#drawer").setAttribute("aria-hidden","true"); }
+$("#openCart").addEventListener("click", openCart);
+$("#scrim").addEventListener("click", closeAll);
+$("#checkout").addEventListener("click", e => { if (e.target.closest("[data-close]") || e.target.id==="checkout") closeAll(); });
+document.addEventListener("keydown", e => { if (e.key==="Escape") closeAll(); });
+
+/* ----- Checkout simulado ----- */
+const user = {name:"Andrea Martínez", email:"amartinez@kpmg.com.mx", emp:"MX-204518", office:"Ciudad de México", pay:"nomina"};
+function setStep(i){ $$("#progress div").forEach((d,k)=>d.classList.toggle("on",k<=i)); }
+function summaryHTML(t){ return `<div class="summary">
+  ${Object.entries(cart).map(([id,q])=>{const p=byId(id);return `<div class="r"><span>${q} × ${p.name} (${CHAIN[p.chain]})</span><span>${mxn(p.price*q)}</span></div>`}).join("")}
+  <div class="r" style="color:var(--ok);font-weight:700"><span>Ahorro vs. taquilla</span><span>−${mxn(t.save)}</span></div>
+  <div class="r t"><span>Total a pagar</span><span>${mxn(t.sub)}</span></div></div>`; }
+
+function openCheckout(){
+  if (!totals().n) return;
+  $("#scrim").classList.add("on"); $("#checkout").classList.add("on");
+  stepUser();
+}
+function stepUser(){
+  setStep(0);
+  $("#ckBody").innerHTML = `
+    <p style="margin-top:0;color:var(--muted)">Valida tu acceso como colaborador KPMG para aplicar el precio preferencial.</p>
+    <form id="fUser">
+      <div class="field"><label for="uName">Nombre completo</label><input id="uName" required value="${user.name}"></div>
+      <div class="two">
+        <div class="field"><label for="uEmail">Correo corporativo</label><input id="uEmail" type="email" required pattern=".+@kpmg\\.com(\\.mx)?$" value="${user.email}" title="Usa tu correo @kpmg.com.mx"></div>
+        <div class="field"><label for="uEmp">Número de colaborador</label><input id="uEmp" required value="${user.emp}"></div>
+      </div>
+      <div class="field"><label for="uOff">Oficina</label><select id="uOff">${["Ciudad de México","Monterrey","Guadalajara","Querétaro","Puebla","Mérida","Tijuana","Otra"].map(o=>`<option ${o===user.office?"selected":""}>${o}</option>`).join("")}</select></div>
+      <div class="actions"><button type="button" class="btn btn-outline" data-back>Volver al carrito</button><button class="btn btn-primary">Continuar al pago</button></div>
+    </form>`;
+  $("#ckBody [data-back]").onclick = () => { closeAll(); openCart(); };
+  $("#fUser").onsubmit = e => { e.preventDefault(); Object.assign(user,{name:$("#uName").value,email:$("#uEmail").value,emp:$("#uEmp").value,office:$("#uOff").value}); stepPay(); };
+}
+function stepPay(){
+  setStep(1);
+  const t = totals();
+  $("#ckBody").innerHTML = `
+    ${summaryHTML(t)}
+    <form id="fPay">
+      <div class="pay-opts">
+        <label class="pay-opt"><input type="radio" name="pay" value="nomina" ${user.pay==="nomina"?"checked":""}><div><b>Descuento vía nómina</b><span>Se descuenta en tu próxima quincena. Sin tarjeta.</span></div></label>
+        <label class="pay-opt"><input type="radio" name="pay" value="tarjeta" ${user.pay==="tarjeta"?"checked":""}><div><b>Tarjeta de crédito o débito</b><span>Visa, Mastercard o American Express.</span></div></label>
+      </div>
+      <div id="cardFields"></div>
+      <div class="actions"><button type="button" class="btn btn-outline" data-back>Atrás</button><button class="btn btn-primary">Pagar ${mxn(t.sub)}</button></div>
+      <p class="disc">🔒 Simulación: no se solicita ni procesa información de pago real.</p>
+    </form>`;
+  const cf = () => { user.pay = $("#fPay").pay.value; $("#cardFields").innerHTML = user.pay==="tarjeta" ? `
+      <div class="field"><label>Número de tarjeta (demo)</label><input value="4242 •••• •••• 4242" readonly></div>
+      <div class="two"><div class="field"><label>Vencimiento</label><input value="12/29" readonly></div><div class="field"><label>CVV</label><input value="•••" readonly></div></div>` : ""; };
+  $$("#fPay input[name=pay]").forEach(r => r.onchange = cf); cf();
+  $("#ckBody [data-back]").onclick = stepUser;
+  $("#fPay").onsubmit = e => { e.preventDefault(); processing(); };
+}
+function processing(){
+  $("#ckBody").innerHTML = `<div class="processing"><div class="spinner"></div><b>Procesando tu compra…</b><p style="color:var(--muted);margin:6px 0 0">TaquillApp está generando tus folios</p></div>`;
+  setTimeout(stepDone, 1600);
+}
+function code(chain){
+  const A="ABCDEFGHJKLMNPQRSTUVWXYZ23456789", r=n=>Array.from({length:n},()=>A[Math.floor(Math.random()*A.length)]).join("");
+  return `${chain==="cp"?"CP":"CX"}-${r(4)}-${r(4)}-${r(4)}`;
+}
+function qr(seed){
+  let h=0; for (const c of seed) h=(h*31+c.charCodeAt(0))>>>0;
+  const rnd=()=> (h=(h*1103515245+12345)>>>0, h/4294967296);
+  const finder=(x,y)=>[[0,0],[14,0],[0,14]].some(([fx,fy])=>{const dx=x-fx,dy=y-fy; if(dx<0||dy<0||dx>6||dy>6) return null; return dx===0||dy===0||dx===6||dy===6||(dx>=2&&dx<=4&&dy>=2&&dy<=4);});
+  const inF=(x,y)=>[[0,0],[14,0],[0,14]].some(([fx,fy])=>x>=fx&&x<=fx+7&&y>=fy&&y<=fy+7);
+  let s=""; for(let y=0;y<21;y++)for(let x=0;x<21;x++){ const k = inF(x,y) ? finder(x,y) : rnd()>.5; s+=`<i class="${k?"k":""}"></i>`; }
+  return `<div class="qr" aria-hidden="true">${s}</div>`;
+}
+function stepDone(){
+  setStep(2);
+  const t = totals();
+  const exp = new Date(); exp.setDate(exp.getDate()+90);
+  const expS = exp.toLocaleDateString("es-MX",{day:"numeric",month:"long",year:"numeric"});
+  const order = "TQA-KPMG-" + Math.floor(100000+Math.random()*900000);
+  let folios = "";
+  for (const [id,q] of Object.entries(cart)){ const p=byId(id); for(let i=0;i<q;i++){ const c=code(p.chain); folios += `
+    <div class="folio">${qr(c)}<div>
+      <div class="fi"><span class="chain ${p.chain}">${CHAIN[p.chain].toUpperCase()}</span> &nbsp;<b>${p.name}</b> · ${p.days}</div>
+      <div class="code">${c}</div>
+      <div class="fi">Vigente hasta el ${expS}</div>
+      <button class="copy no-print" data-copy="${c}">Copiar código</button>
+    </div></div>`; } }
+  const chains = [...new Set(Object.keys(cart).map(id=>CHAIN[byId(id).chain]))].join(" o ");
+  $("#ckBody").innerHTML = `
+    <div class="success">✓ ¡Listo, ${user.name.split(" ")[0]}! Ahorraste ${mxn(t.save)} con tu beneficio KPMG.</div>
+    <p style="margin:0 0 14px;color:var(--muted);font-size:14px">Pedido <b style="color:var(--ink)">${order}</b> · Enviamos una copia a <b style="color:var(--ink)">${user.email}</b> · Pago: ${user.pay==="nomina"?"descuento vía nómina":"tarjeta"}</p>
+    ${folios}
+    <div class="howto"><b>¿Cómo canjeo?</b><ol><li>Acude a taquilla de ${chains}.</li><li>Elige tu película, horario y asientos.</li><li>Presenta tu folio (impreso o en tu celular) y recibe tu boleto.</li></ol></div>
+    <p class="disc">Códigos y QR generados aleatoriamente para la demostración; no son canjeables.</p>
+    <div class="actions no-print" style="margin-top:16px"><button class="btn btn-outline" id="printF">Imprimir / guardar PDF</button><button class="btn btn-primary" id="finish">Volver al catálogo</button></div>`;
+  $("#printF").onclick = () => window.print();
+  $("#finish").onclick = () => { cart={}; renderCart(); closeAll(); location.hash="#catalogo"; };
+  $$("[data-copy]").forEach(b => b.onclick = () => {
+    const done=()=>toast("Código copiado");
+    (navigator.clipboard ? navigator.clipboard.writeText(b.dataset.copy).then(done,done) : done());
+  });
+  $(".dialog").scrollTop = 0;
+}
+
+/* ----- Ahorro ----- */
+function renderSavings(){
+  const p = byId("cp-vip"), n = 2, v = +$("#visits").value;
+  $("#cmpRegular").textContent = mxn(p.regular*n);
+  $("#cmpKpmg").textContent = mxn(p.price*n);
+  $("#cmpSave").textContent = mxn((p.regular-p.price)*n);
+  $("#visitsLbl").textContent = v + (v===1?" visita":" visitas");
+  $("#yearSave").textContent = mxn((p.regular-p.price)*n*v*12);
+}
+$("#visits").addEventListener("input", renderSavings);
+
+let tt; function toast(m){ const t=$("#toast"); t.textContent=m; t.classList.add("on"); clearTimeout(tt); tt=setTimeout(()=>t.classList.remove("on"),1800); }
+
+renderGrid(); renderCart(); renderSavings();
+</script>
+</body>
+</html>
