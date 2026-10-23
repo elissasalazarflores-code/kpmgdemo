@@ -1,0 +1,5 @@
+Pon aquí los clips con estos nombres exactos:
+  01_mano_codigo.mp4
+  02_canje_real.mp4
+  03_combo.jpg   (o 03_combo.mp4)
+Luego: scripts/armar_videos.sh
