@@ -1,0 +1,7 @@
+Pon aquí los clips con estos nombres exactos:
+  01_mano_codigo.mp4   (obligatorio)
+  02_canje_real.mp4    (obligatorio)
+  03_combo.mp4         (obligatorio)
+  04_palomitas.mp4     (opcional: si no está, la escena 4 usa el fondo de color)
+  audio.mp3            (opcional: si no está, se usa el audio original al 40%)
+Luego: scripts/armar_reel.sh

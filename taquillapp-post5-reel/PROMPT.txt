@@ -1,0 +1,10 @@
+Lee README.md completo antes de empezar. Vamos a editar el Reel del Post 5 de TaquillApp (15 s, 1080×1920).
+
+1. Revisa que estén instalados ffmpeg, Node, Playwright y la fuente Plus Jakarta Sans. Si falta algo, dime cómo instalarlo antes de seguir.
+2. Revisa la carpeta clips/ y dime qué archivos hay, con su duración y resolución. Avísame si falta alguno obligatorio.
+3. Con Playwright, abre diseno/Post5_Reel_Combos.html y exporta las capas de cada escena como dice el README: textos sobre fondo transparente donde hay clip, y escena completa donde no lo hay. Oculta los recuadros punteados y las notas de producción. Guarda las capas en capas/.
+4. Con ffmpeg, arma output/post5_reel_combos.mp4: escala y recorta cada clip a 9:16, respeta la línea de tiempo del README, pon encima las capas con las animaciones de entrada descritas, usa cortes secos y agrega el audio.
+5. Exporta output/portada.png a partir de la escena 1.
+6. Saca un fotograma de cada escena (en 1, 4, 7.5, 10.5 y 14 s) y muéstramelos para revisar.
+
+No cambies textos, colores ni posiciones del diseño. Si algo del README no se puede hacer, pregúntame antes de improvisar.
