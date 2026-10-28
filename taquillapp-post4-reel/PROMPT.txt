@@ -1,0 +1,10 @@
+Lee README.md completo antes de empezar. Vamos a animar el Reel del Post 4 de TaquillApp, «Mejores comentarios» (14 s, 1080×1920). No lleva clips grabados: todo es gráfico animado.
+
+1. Revisa que estén instalados ffmpeg, Node, Playwright y la fuente Plus Jakarta Sans. Si falta algo, dime cómo instalarlo antes de seguir.
+2. Revisa si existe clips/audio.mp3 y dime cuánto dura.
+3. Con Playwright, abre diseno/Post4_Reel_Mejores_Comentarios.html y exporta las capas como dice el README: el fondo de cada escena por separado, y cada pill, caja de texto y burbuja como PNG transparente en su posición. Guárdalas en capas/.
+4. Arma output/post4_reel_comentarios.mp4 respetando la línea de tiempo y las animaciones del README (burbujas una por una, que se quedan en pantalla como collage). Une las escenas con cortes secos y agrega el audio si existe.
+5. Exporta output/portada.png a partir de la escena 1.
+6. Saca los fotogramas de revisión que indica el README y muéstramelos.
+
+No cambies textos, emojis, colores ni posiciones del diseño. Si algo del README no se puede hacer, pregúntame antes de improvisar.
